@@ -128,7 +128,7 @@ def top_biz_pred(name_id, df_all, df_mat, df_pred, n=5):
     return name, top_biz_list
 
 
-def surprise_validate(df):
+def surprise_validate(df): # doesn't work!!!
     data = df[['user_id'
                , 'business_id'
                , 'average_stars']].loc[df.city == 'Scottsdale']
