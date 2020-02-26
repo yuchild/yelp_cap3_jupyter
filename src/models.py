@@ -3,6 +3,26 @@ import numpy as np
 from sklearn.model_selection import train_test_split
 from scipy.sparse.linalg import svds
 
+from surprise import (SVD
+                      , SVDpp
+                      , SlopeOne
+                      , NMF
+                      , NormalPredictor
+                      , KNNBaseline
+                      , KNNBasic
+                      , KNNWithMeans
+                      , KNNWithZScore
+                      , BaselineOnly
+                      , CoClustering)
+from surprise import NormalPredictor
+from surprise import Dataset
+from surprise import Reader
+from surprise.model_selection import cross_validate, train_test_split
+from surprise import accuracy
+
+from sklearn.decomposition import NMF
+
+
 def load_data():
     biz_dt = pd.read_json('data/business.json', lines = True)
     rev_dt = pd.read_json('data/review.json', lines = True)
@@ -62,6 +82,15 @@ def combine_tables(user_df, rev_df, biz_df):
                                    , 'review_count_y': 'biz_review_count'}
                         , inplace = True)
     user_rev_biz = user_rev_biz.loc[user_rev_biz['is_open'] == 1]
+    user_rev_biz = user_rev_biz.drop(['address'
+                                      , 'state'
+                                      , 'postal_code'
+                                      , 'latitude'
+                                      , 'longitude'
+                                      , 'is_open'
+                                      , 'hours'
+                                     ]
+                                    , axis = 1)
     return user_rev_biz
 
 def collab_mat(city, df):
@@ -99,11 +128,57 @@ def top_biz_pred(name_id, df_all, df_mat, df_pred, n=5):
     return name, top_biz_list
 
 
+def surprise_validate(df):
+    data = df[['user_id'
+               , 'business_id'
+               , 'average_stars']].loc[df.city == 'Scottsdale']
+    
+    reader = Reader()
+    data = Dataset.load_from_df(data, reader)
+    
+    trainset, testset = train_test_split(data, test_size = 0.25)
+    
+    algo = SVD()
+    algo.fit(trainset)
+    
+    predictions = algo.test(testset)
+    
+    acc = accuracy.rmse(predictions)
+    
+    benchmark = []
+    # Iterate over all algorithms
+    for algorithm in [SVD()
+                      , NMF()
+                      , NormalPredictor()
+                      , CoClustering()
+                      , BaselineOnly()
+                     ]:
+    # Perform cross validation
+        results = cross_validate(algorithm
+                                 , data
+                                 , measures=['RMSE']
+                                 , cv=5
+                                 , verbose=False)
+
+        # Get results & append algorithm name
+        tmp = pd.DataFrame.from_dict(results).mean(axis=0)
+        tmp = tmp.append(pd.Series([str(algorithm).split(' ')[0].split('.')[-1]], index=['Algorithm']))
+        benchmark.append(tmp)
+    
+    df_sum = pd.DataFrame(benchmark).set_index('Algorithm').sort_values('test_rmse')
+        
+    return data, acc, df_sum
 
 
-
-
-
+def NMF_Mat(df):
+    model_nmf = NMF(n_components = 40
+               , init = 'random'
+               , random_state = 0)
+    m = model_nmf.fit_transform(df)
+    h = model_nmf.components_
+    nmf_mat = m @ h
+    
+    return nmf_mat
 
 
 
