@@ -1,6 +1,5 @@
 import pandas as pd
 import numpy as np
-from sklearn.model_selection import train_test_split
 from scipy.sparse.linalg import svds
 
 from surprise import (SVD
@@ -17,10 +16,24 @@ from surprise import (SVD
 from surprise import NormalPredictor
 from surprise import Dataset
 from surprise import Reader
-from surprise.model_selection import cross_validate, train_test_split
+
+from surprise.model_selection.validation import cross_validate
 from surprise import accuracy
 
 from sklearn.decomposition import NMF
+
+from tensorflow.keras.layers import (Input
+                                     , Embedding
+                                     , Dot
+                                     , Flatten
+                                    )
+from tensorflow.keras.models import Model
+from tensorflow.keras.models import load_model
+from tensorflow.keras.callbacks import History
+from tensorflow.keras.metrics import Accuracy
+from tensorflow.keras.callbacks import Callback
+
+import os
 
 
 def load_data():
@@ -127,16 +140,23 @@ def top_biz_pred(name_id, df_all, df_mat, df_pred, n=5):
         top_biz_list.append(df_all['biz_name'].loc[df_all.business_id == bz].unique()[0])
     return name, top_biz_list
 
-
-def surprise_validate(df): # doesn't work!!!
+def svd_model(df):
+    """
+    Creates svd model for predcitions and cross validation
+    Returns: data 
+    """
+    from surprise.model_selection.split import train_test_split
     data = df[['user_id'
-               , 'business_id'
-               , 'average_stars']].loc[df.city == 'Scottsdale']
+                    , 'business_id'
+                    , 'average_stars']].loc[df.city == 'Scottsdale']
     
     reader = Reader()
-    data = Dataset.load_from_df(data, reader)
     
-    trainset, testset = train_test_split(data, test_size = 0.25)
+    data = Dataset.load_from_df(data
+                               , reader)
+    
+    trainset, testset = train_test_split(data
+                                        , test_size=0.25)
     
     algo = SVD()
     algo.fit(trainset)
@@ -145,29 +165,40 @@ def surprise_validate(df): # doesn't work!!!
     
     acc = accuracy.rmse(predictions)
     
+    svd_cv = cross_validate(SVD()
+                           , data
+                           , cv = 5)
+    
+    return data, acc, svd_cv['test_rmse']
+
+def surprise_bench(dat):
+    """
+    Creates benchmark dataframe of SVD, NMF, NormalPredictor, and Baseline with 
+    5 Fold cross validation and returns rmse metrics
+    """
+    from surprise.model_selection.validation import cross_validate
+    
     benchmark = []
+    
     # Iterate over all algorithms
     for algorithm in [SVD()
                       , NMF()
                       , NormalPredictor()
-                      , CoClustering()
                       , BaselineOnly()
                      ]:
     # Perform cross validation
         results = cross_validate(algorithm
-                                 , data
+                                 , dat
                                  , measures=['RMSE']
                                  , cv=5
-                                 , verbose=False)
+                                )
 
         # Get results & append algorithm name
         tmp = pd.DataFrame.from_dict(results).mean(axis=0)
         tmp = tmp.append(pd.Series([str(algorithm).split(' ')[0].split('.')[-1]], index=['Algorithm']))
         benchmark.append(tmp)
-    
-    df_sum = pd.DataFrame(benchmark).set_index('Algorithm').sort_values('test_rmse')
-        
-    return data, acc, df_sum
+
+    return pd.DataFrame(benchmark).set_index('Algorithm').sort_values('test_rmse')
 
 
 def NMF_Mat(df):
@@ -177,17 +208,138 @@ def NMF_Mat(df):
     m = model_nmf.fit_transform(df)
     h = model_nmf.components_
     nmf_mat = m @ h
-    
+  
     return nmf_mat
 
+def NN_Model(df, n_factors = 10, ep = 5):
+    from sklearn.model_selection import train_test_split
+    user_rev_biz_scott = df[['user_id'
+                                   , 'user_name'
+                                   , 'business_id'
+                                   , 'biz_name'
+                                   , 'average_stars']].loc[df.city == 'Scottsdale']
+    
+    user_id_list = list(user_rev_biz_scott.user_id.value_counts().index)
+    user_id_dict = {y: x for (x, y) in enumerate(user_id_list)}
+    user_rev_biz_scott['user_num'] = user_rev_biz_scott.user_id.map(user_id_dict)
+    
+    biz_id_list = list(user_rev_biz_scott.business_id.value_counts().index)
+    biz_id_dict = {y: x for (x, y) in enumerate(biz_id_list)}
+    user_rev_biz_scott['biz_num'] = user_rev_biz_scott.business_id.map(biz_id_dict)
+    
+    X = user_rev_biz_scott[['user_num'
+                        , 'user_name'
+                        , 'biz_num'
+                        , 'biz_name'
+                        , 'average_stars'
+                       ]]
+    y = user_rev_biz_scott.average_stars
+    
+    X_train, X_test, y_train, y_test = train_test_split(X
+                                                        , y
+                                                        , test_size=0.25
+                                                        , random_state=42)
+
+    n_users = user_rev_biz_scott.user_id.nunique()
+    n_biz = user_rev_biz_scott.business_id.nunique()
+    
+    biz_input = Input(shape=[1]
+                     , name = 'Biz_Input')
+    biz_embedding = Embedding(n_biz
+                             , n_factors
+                             , name='Biz_Embed')(biz_input)
+    biz_vac = Flatten(name = 'Flatten_Biz')(biz_embedding)
+
+    user_input = Input(shape=[1]
+                      , name = 'User_Input')
+    user_embedding = Embedding(n_users
+                              , n_factors
+                              , name = 'User_Embed')(user_input)
+    user_vac = Flatten(name = "Flatten_User")(user_embedding)
+
+    prod = Dot(name = 'Dot_Product'
+              , axes = 1)([biz_vac, user_vac])
+    model = Model([user_input, biz_input]
+                 , prod)
+    model.compile(optimizer = 'adam'
+                 , loss = 'mse'
+                 , metrics = ['accuracy'])
+    
+    class TestCallback(Callback):
+        def __init__(self, test_data):
+            self.test_data = test_data
+
+        def on_epoch_end(self, epoch, logs={}):
+            x, y = self.test_data
+            loss, acc = self.model.evaluate(x, y, verbose=0)
+            print('\nTesting loss: {}, acc: {}\n'.format(loss, acc))
+        
+    if os.path.exists('biz_model.h5'):
+        model = load_model('biz_model.h5')
+    else:
+        history = model.fit([X_train.user_num
+                             , X_train.biz_num]
+                             , y_train
+                             , epochs=ep
+                             , verbose=False
+                             , validation_data = ([X_test.user_num
+                                                   , X_test.biz_num]
+                                                   , y_test)
+                             , callbacks = [TestCallback(([X_test.user_num
+                                                           , X_test.biz_num]
+                                                           , y_test))]
+                           )
+    model.save('NN_Embed_Model')
+    return X_test, model, history
+
+
+def NN_Results_df(mod, xtest, n=10):
+    predictions = mod.predict([xtest.user_num.head(n)
+                              , xtest.biz_num.head(n)]
+                             )
+    pred_df = xtest[['user_name', 'biz_name', 'average_stars']].iloc[0:n]
+    pred_df['Prediction'] = predictions
+    return pred_df
 
 
 
-
-
-
-
-
+def con_bas_biz_rec(df, n = 5):
+    
+    from sklearn.feature_extraction.text import CountVectorizer
+    from sklearn.metrics.pairwise import cosine_similarity
+    
+    df.fillna('', inplace = True)
+    
+    def combine(rows):
+        return rows['rev_text']+' '+rows['categories']
+    
+    df['text'] = df.apply(combine
+                          , axis = 1)
+    
+    user_rev_biz_scott = df.loc[df.city == 'Scottsdale']
+    
+    urbs_cond = user_rev_biz_scott.drop_duplicates(subset = 'business_id')
+    
+    count_matrix = CountVectorizer().fit_transform(urbs_cond['text'])
+    
+    cosine_sim = cosine_similarity(count_matrix, count_matrix)
+    
+    biz = cosine_sim[0].argsort()[-(n+1):][::-1][1:]
+    
+    biz_perc = cosine_sim[0][biz]
+    
+    biz_dict = {x: y for x in urbs_cond.business_id for y in urbs_cond.biz_name}
+    
+    biz_df = urbs_cond[['business_id', 'biz_name']]
+    
+    biz_similar = []
+    for idx in biz:
+        biz_similar.append(biz_df.biz_name.iloc[idx])
+    
+    biz_dict = {'name': biz_similar
+               , 'rating': biz_perc}
+    
+    return pd.DataFrame(biz_dict)
 
 
 
