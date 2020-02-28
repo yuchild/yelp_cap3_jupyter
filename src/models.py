@@ -13,7 +13,7 @@ from surprise import (SVD
                       , KNNWithZScore
                       , BaselineOnly
                       , CoClustering)
-from surprise import NormalPredictor
+
 from surprise import Dataset
 from surprise import Reader
 
@@ -34,7 +34,8 @@ from tensorflow.keras.metrics import Accuracy
 from tensorflow.keras.callbacks import Callback
 
 import os
-
+import warnings
+warnings.filterwarnings('ignore')
 
 def load_data():
     biz_dt = pd.read_json('data/business.json', lines = True)
@@ -171,26 +172,46 @@ def svd_model(df):
     
     return data, acc, svd_cv['test_rmse']
 
-def surprise_bench(dat):
+def surprise_bench(df):
     """
     Creates benchmark dataframe of SVD, NMF, NormalPredictor, and Baseline with 
     5 Fold cross validation and returns rmse metrics
     """
+    from surprise import (SVD
+                      , SVDpp
+                      , NMF
+                      , NormalPredictor
+                      , BaselineOnly)
+
+    from surprise import Dataset
+    from surprise import Reader
+
     from surprise.model_selection.validation import cross_validate
+    from surprise import accuracy
     
+    data = df[['user_id'
+                    , 'business_id'
+                    , 'average_stars']].loc[df.city == 'Scottsdale']
+    
+    reader = Reader()
+    
+    data = Dataset.load_from_df(data
+                               , reader)    
     benchmark = []
     
     # Iterate over all algorithms
     for algorithm in [SVD()
+                      , SVDpp()
                       , NMF()
                       , NormalPredictor()
                       , BaselineOnly()
                      ]:
     # Perform cross validation
         results = cross_validate(algorithm
-                                 , dat
-                                 , measures=['RMSE']
+                                 , data
+                                 , measures=['RMSE', 'MAE']
                                  , cv=5
+                                 , verbose=False
                                 )
 
         # Get results & append algorithm name
