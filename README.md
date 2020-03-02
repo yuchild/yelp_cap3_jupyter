@@ -78,7 +78,7 @@ The collaborative matrix used is made up of **140940** unique user_id on the ind
 
 | SVD Recommendations in Scottsdale, AZ | NMF Recommendations  in Scottsdale, AZ | Patroized Establishments in Scottsdale |
 | :-----: | :-----: | :-----: |
-| <img src='png/svd.png' width='400' height='350'> | <img src='png/nnmf.png' width='400' height='350'> | <img src='png/user_patronage.png' width='400' height='350'> |
+| <img src='png/svd.png' width='400' height='350'> | <img src='png/nmf.png' width='400' height='350'> | <img src='png/user_patronage.png' width='400' height='350'> |
 <br>
 
 
@@ -112,7 +112,7 @@ Taking a sample business Janet Kirkman Bridal Redesigns, the neuro network was a
 | Sample output for Neuro Network Model |
 | :-----: |
 | <img src='png/janet_k_biz.png' width='400' height='350'>  |
-| <img src='png/janet_k_biz.png' width='400' height='350'>  |
+| <img src='png/janet_k_biz_rec.png' width='400' height='350'>  |
 <br>
 
 
