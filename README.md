@@ -3,7 +3,8 @@
 ### Project Status: [Active]
 
 ## Project Intro/Objective
-The purpose of this project is to create recommenders to help users find establishments they like in Scottsdale Arizona. There are two types of recommenders employed to service this goal: collaborative filtering and content based recommenders. The collaborative filters separates pivots users and business on average user ratings. The content based recommender uses review text and categories of businesses on their vectorized cosine similarities.
+The purpose of this project is to create recommenders to help users find establishments they like in Scottsdale Arizona. There are two types of recommenders employed to service this goal: collaborative filtering and content based recommenders. The collaborative filters use pivot-tables to separate users and business on average user ratings. The content based recommender uses review text and categories of businesses on their vectorized cosine similaritie of user review texts and business categories.
+<br>
 
 
 ### Methods Used
@@ -12,6 +13,7 @@ The purpose of this project is to create recommenders to help users find establi
 * Data Visualization
 * Predictive Modeling
 * Model Validation
+<br>
 
 
 ### Technologies
@@ -19,55 +21,62 @@ The purpose of this project is to create recommenders to help users find establi
 * Docker (for Tensorflow GPU)
 * flask (api, not operational yet)
 * Postman (api, not operational yet)
+<br>
 
 
 ## Project Description and Exploratory Data Analysis (EDA)
 The project is based on the open yelp dataset found [here](yelp.com/dataset). The recommenders will mainly come from three sources: user.json, review.json, and business.json (see how to run the project to get those files below), which will be merged to create a master table with an inner join based on the feature business_id.
 
 From the master table, the city will be narrowed to Scottsdale to perform EDA, pivot table on user_id and business_id, SVD, NMF, Neuro Network modeling and content based filtering. The result is four recommender models: 3 collaborative and 1 content based.
+<br>
 
 
 ### EDA
-The business environment in Scottsdale Arizona is mainly service oriented. There are **7081** unique Scottsdale businesses in the dataset and the top 20 categories are shown below:
+The business environment in Scottsdale Arizona is service oriented. There are **7081** unique Scottsdale businesses in the dataset and the top 20 categories are shown below:
 
 | Scottsdale, AZ |
 | :-----: |
-| <img src='png/top_20_biz_cat.png' width='400' height='350'> |
+| <img src='png/top_20_biz_cat.png' width='600' height='400'> |
 <br>
+
 
 In addition to the top categories, it is important to see how the businesses are **rated** (scale of 1 to 5) along with their **review counts** to get review sentiment:
 
 | Business Ratings in Scottsdale, AZ | Business Review Count in Scottsdale, AZ|
 | :-----: | :-----: |
-| <img src='png/biz_stars_rating.png' width='400' height='350'> | <img src='png/biz_rev_count.png' width='400' height='350'> |
+| <img src='png/biz_stars_rating.png' width='450' height='350'> | <img src='png/biz_rev_count.png' width='450' height='350'> |
 <br>
+
 
 Users then generate **ratings** for the business establishments, here are their **stars given** on the scale of 1 to 5:
 
 | Users in Scottsdale, AZ |
 | :-----: |
-| <img src='png/user_stars_given.png' width='400' height='350'> |
+| <img src='png/user_stars_given.png' width='450' height='350'> |
 <br>
+
 
 In addition to user ratings (on the scale of 1 to 5), it is good to get a sense of user review and checkin counts, both should be **similar**:
 
 | User Ratings Scottsdale, AZ | User Check-In Counts Scottsdale, AZ|
 | :-----: | :-----: |
-| <img src='png/user_rev_count.png' width='400' height='350'> | <img src='png/checkin_frequencies.png' width='400' height='350'> |
+| <img src='png/user_rev_count.png' width='450' height='350'> | <img src='png/checkin_frequencies.png' width='450' height='350'> |
 <br>
+
 
 Lets take a deeper dive into the reviews. Here are the **review** wordcloud and top 10 review words used:
 
 | Reviews Wordcloud Scottsdale, AZ | Top 10 Review Words Scottsdale, AZ|
 | :-----: | :-----: |
-| <img src='png/reviews_wordcloud.png' width='400' height='350'> | <img src='png/top_10_words_rev.png' width='400' height='350'> |
+| <img src='png/reviews_wordcloud.png' width='450' height='350'> | <img src='png/top_10_words_rev.png' width='450' height='350'> |
 <br>
+
 
 Lets take a deeper dive into the reviews. Here are he **tips** wordcloud and top 10 tip words used:
 
 | Tips Wordcloud Scottsdale, AZ | Top 10 Tip Words Scottsdale, AZ|
 | :-----: | :-----: |
-| <img src='png/tips_wordcloud.png' width='400' height='350'> | <img src='png/top_10_words_tip.png' width='400' height='350'> |
+| <img src='png/tips_wordcloud.png' width='450' height='350'> | <img src='png/top_10_words_tip.png' width='450' height='350'> |
 <br>
 
 
@@ -123,13 +132,13 @@ This project surveyed three unsupervised learning and one consine similarity lea
 4. Tuning the neuro network model with possible addition of data from web scrapping
 5. Provide justification that these recommenders are better than the yelp sorting options
 <br>
- 
+
 
 ## Folders on the Github Repository
 * data - **folder missing** because of file size restrictions by Github
 * flask - folder where the web api is housed (not operational)
 * NN_Embeded_Model - folder where the Nero Network Model is stored
-* photos - **folder missing** because of file size restrictions by Github
+* photos - **folder missing** because of file size restrictions by Github, this was not used in the EDA and Models
 * png - where EDA photos are stored
 * src - folder where the code for the jupyter notebook is housed
 <br>
