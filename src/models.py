@@ -201,7 +201,6 @@ def surprise_bench(df):
     
     # Iterate over all algorithms
     for algorithm in [SVD()
-                      , SVDpp()
                       , NMF()
                       , NormalPredictor()
                       , BaselineOnly()
@@ -210,7 +209,7 @@ def surprise_bench(df):
         results = cross_validate(algorithm
                                  , data
                                  , measures=['RMSE', 'MAE']
-                                 , cv=5
+                                 , cv=7
                                  , verbose=False
                                 )
 

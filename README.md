@@ -21,7 +21,7 @@ The purpose of this project is to create recommenders to help users find establi
 * Postman (api, not operational yet)
 
 
-## Project Description
+## Project Description and Exploratory Data Analysis (EDA)
 The project is based on the open yelp dataset found [here](yelp.com/dataset). The recommenders will mainly come from three sources: user.json, review.json, and business.json (see how to run the project to get those files below), which will be merged to create a master table with an inner join based on the feature business_id.
 
 From the master table, the city will be narrowed to Scottsdale to perform EDA, pivot table on user_id and business_id, SVD, NMF, Neuro Network modeling and content based filtering. The result is four recommender models: 3 collaborative and 1 content based.
@@ -70,7 +70,50 @@ Lets take a deeper dive into the reviews. Here are he **tips** wordcloud and top
 | <img src='png/tips_wordcloud.png' width='400' height='350'> | <img src='png/top_10_words_tip.png' width='400' height='350'> |
 <br>
 
-## models
+
+## Models for Recommenders
+
+### SVD and NMF Models
+The collaborative matrix used is made up of **140940** unique user_id on the index column and **7081** unique business_id along the top column headers. The values inside are comprised of the average of user ratings. The average user rating is chosen to exploit user insights along the types of businesses they have patronized. Below is a sample of one user's recommendation and her 10 patronized establishments:
+
+| SVD Recommendations in Scottsdale, AZ | NMF Recommendations  in Scottsdale, AZ | Patroized Establishments in Scottsdale |
+| :-----: | :-----: | :-----: |
+| <img src='png/svd.png' width='400' height='350'> | <img src='png/nnmf.png' width='400' height='350'> | <img src='png/user_patronage.png' width='400' height='350'> |
+<br>
+
+
+### SVD and NMF Model Validations
+Using the python library Surprise, the folling metrics for 7 fold cross validations are achieved:
+
+| 7 CV Validations with Surprise |
+| :-----: |
+| <img src='png/validations.png' width='400' height='350'>  |
+<br>
+
+
+### Embedded Neuro Network Model
+This 10 factor embedded (for both user_id and business_id) network was not as robust as the SVD and NMF models. See **MSE Loss** and **Accuracy** below:
+
+| Embedded Neuro Network Loss and Accuracy |
+| :-----: |
+| <img src='png/NN_loss_acc.png' width='400' height='350'>  |
+<br>
+
+
+| Sample output of Neuro Network Model |
+| :-----: |
+| <img src='png/NN_output.png' width='400' height='350'>  |
+<br>
+
+
+### Content Filtering for Recommending Businesses
+Taking a sample business Janet Kirkman Bridal Redesigns, the neuro network was able to recommend the following:
+
+| Sample output for Neuro Network Model |
+| :-----: |
+| <img src='png/janet_k_biz.png' width='400' height='350'>  |
+| <img src='png/janet_k_biz.png' width='400' height='350'>  |
+<br>
 
 
 # Folders on the Github Repository
@@ -80,6 +123,7 @@ Lets take a deeper dive into the reviews. Here are he **tips** wordcloud and top
 * photos - **folder missing** because of file size restrictions by Github
 * png - where EDA photos are stored
 * src - folder where the code for the jupyter notebook is housed
+<br>
 
 
 ## To Run This Project for Yourself
@@ -90,7 +134,8 @@ Lets take a deeper dive into the reviews. Here are he **tips** wordcloud and top
 3. Unzip the yelp_dataset.tar inside the data folder you created
 4. Delete the yelp_dataset.tar file, as its file size is 3.9GB
 5. Make sure your workstation has 64GB of ram, or use AWS services with enough 64GB+ ram capacity.
+<br>
 
 
 ## Contact
-* You can find me on, [you can do that here](gstudents.slack.com).
+* You can find me (David Yu) on slack, [you can do that here](gstudents.slack.com).
