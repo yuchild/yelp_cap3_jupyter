@@ -311,7 +311,7 @@ def NN_Model(df, n_factors = 10, ep = 5):
                                                            , y_test))]
                            )
     model.save('NN_Embed_Model')
-    return X_test, model, history
+    return X, X_test, model, history
 
 
 def NN_Results_df(mod, xtest, n=10):
