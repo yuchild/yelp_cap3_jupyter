@@ -7,8 +7,7 @@ The purpose of this project is to create recommenders to help users find establi
 <br>
 
 
-
-### Methods Used
+## Methods Used
 * Inferential Statistics
 * Machine Learning
 * Data Visualization
@@ -16,7 +15,8 @@ The purpose of this project is to create recommenders to help users find establi
 * Model Validation
 <br>
 
-# Technologies
+
+## Technologies
 * Python and Libraries (pandas, numpy, sklearn, tensorflow, keras, surprise, wordcloud, matplotlib)
 * Docker (for Tensorflow GPU)
 * flask (api, not operational yet)
@@ -31,7 +31,7 @@ From the master table, the city will be narrowed to Scottsdale to perform EDA, p
 <br>
 
 
-### EDA
+## EDA
 The business environment in Scottsdale Arizona is service oriented. There are **7081** unique Scottsdale businesses in the dataset and the top 20 categories are shown below:
 
 | Scottsdale, AZ |
