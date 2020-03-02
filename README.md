@@ -36,7 +36,7 @@ The business environment in Scottsdale Arizona is service oriented. There are **
 
 | Scottsdale, AZ |
 | :-----: |
-| <img src='png/top_20_biz_cat.png' width='600' height='400'> |
+| <img src='png/top_20_biz_cat.png' width='400' height='300'> |
 <br>
 
 
@@ -44,7 +44,7 @@ In addition to the top categories, it is important to see how the businesses are
 
 | Business Ratings in Scottsdale, AZ | Business Review Count in Scottsdale, AZ|
 | :-----: | :-----: |
-| <img src='png/biz_stars_rating.png' width='450' height='350'> | <img src='png/biz_rev_count.png' width='450' height='350'> |
+| <img src='png/biz_stars_rating.png' width='350' height='300'> | <img src='png/biz_rev_count.png' width='350' height='300'> |
 <br>
 
 
@@ -52,7 +52,7 @@ Users then generate **ratings** for the business establishments, here are their 
 
 | Users in Scottsdale, AZ |
 | :-----: |
-| <img src='png/user_stars_given.png' width='450' height='350'> |
+| <img src='png/user_stars_given.png' width='350' height='300'> |
 <br>
 
 
@@ -60,7 +60,7 @@ In addition to user ratings (on the scale of 1 to 5), it is good to get a sense 
 
 | User Ratings Scottsdale, AZ | User Check-In Counts Scottsdale, AZ|
 | :-----: | :-----: |
-| <img src='png/user_rev_count.png' width='450' height='350'> | <img src='png/checkin_frequencies.png' width='450' height='350'> |
+| <img src='png/user_rev_count.png' width='350' height='300'> | <img src='png/checkin_frequencies.png' width='350' height='300'> |
 <br>
 
 
@@ -68,7 +68,7 @@ Lets take a deeper dive into the reviews. Here are the **review** wordcloud and 
 
 | Reviews Wordcloud Scottsdale, AZ | Top 10 Review Words Scottsdale, AZ|
 | :-----: | :-----: |
-| <img src='png/reviews_wordcloud.png' width='450' height='350'> | <img src='png/top_10_words_rev.png' width='450' height='350'> |
+| <img src='png/reviews_wordcloud.png' width='350' height='300'> | <img src='png/top_10_words_rev.png' width='350' height='300'> |
 <br>
 
 
@@ -76,7 +76,7 @@ Lets take a deeper dive into the reviews. Here are he **tips** wordcloud and top
 
 | Tips Wordcloud Scottsdale, AZ | Top 10 Tip Words Scottsdale, AZ|
 | :-----: | :-----: |
-| <img src='png/tips_wordcloud.png' width='450' height='350'> | <img src='png/top_10_words_tip.png' width='450' height='350'> |
+| <img src='png/tips_wordcloud.png' width='350' height='300'> | <img src='png/top_10_words_tip.png' width='350' height='300'> |
 <br>
 
 
@@ -87,7 +87,7 @@ The collaborative matrix used is made up of **140940** unique user_id on the ind
 
 | SVD Recommendations in Scottsdale, AZ | NMF Recommendations  in Scottsdale, AZ | Patroized Establishments in Scottsdale |
 | :-----: | :-----: | :-----: |
-| <img src='png/svd.png' width='400' height='250'> | <img src='png/nmf.png' width='400' height='250'> | <img src='png/user_patronage.png' width='400' height='250'> |
+| <img src='png/svd.png' width='250' height='200'> | <img src='png/nmf.png' width='250' height='200'> | <img src='png/user_patronage.png' width='250' height='200'> |
 <br>
 
 
@@ -120,8 +120,8 @@ Taking a sample business Janet Kirkman Bridal Redesigns, cosine similarity matri
 
 | Sample output for Neuro Network Model |
 | :-----: |
-| <img src='png/janet_k_biz.png' width='400' height='200'>  |
-| <img src='png/janet_k_biz_rec.png' width='400' height='350'>  |
+| <img src='png/janet_k_biz.png' width='350' height='150'>  |
+| <img src='png/janet_k_biz_rec.png' width='350' height='300'>  |
 <br>
 
 ## Future Directions
