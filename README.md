@@ -1,6 +1,6 @@
 # Yelp Recommender Systems for Scottsdale Arizona
 
-### Project Status: [Active] If you would like to run the project yourself, see **To Run This Project Yourself** section below.
+### Project Status: [Active] If you would like to run the project yourself, see *To Run This Project Yourself* section below.
 
 ## Project Intro/Objective
 The purpose of this project is to create recommenders to help users find establishments they like in Scottsdale Arizona. There are two types of recommenders employed to service this goal: collaborative filtering and content based recommenders. The collaborative filters use pivot-tables to separate users and business on average user ratings. The content based recommender uses review text and categories of businesses on their vectorized cosine similaritie of user review texts and business categories.
