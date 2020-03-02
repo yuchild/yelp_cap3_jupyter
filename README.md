@@ -96,7 +96,7 @@ This 10 factor embedded (for both user_id and business_id) network was not as ro
 
 | Embedded Neuro Network Loss and Accuracy |
 | :-----: |
-| <img src='png/NN_loss_acc.png' width='400' height='350'>  |
+| <img src='png/NN_loss_acc.png' width='800' height='350'>  |
 <br>
 
 
@@ -107,11 +107,11 @@ This 10 factor embedded (for both user_id and business_id) network was not as ro
 
 
 ### Content Filtering for Recommending Businesses
-Taking a sample business Janet Kirkman Bridal Redesigns, the neuro network was able to recommend the following:
+Taking a sample business Janet Kirkman Bridal Redesigns, cosine similarity matrix was able to recommend the following:
 
 | Sample output for Neuro Network Model |
 | :-----: |
-| <img src='png/janet_k_biz.png' width='400' height='350'>  |
+| <img src='png/janet_k_biz.png' width='400' height='200'>  |
 | <img src='png/janet_k_biz_rec.png' width='400' height='350'>  |
 <br>
 
