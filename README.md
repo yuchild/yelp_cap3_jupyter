@@ -7,6 +7,7 @@ The purpose of this project is to create recommenders to help users find establi
 <br>
 
 
+
 ### Methods Used
 * Inferential Statistics
 * Machine Learning
@@ -15,8 +16,7 @@ The purpose of this project is to create recommenders to help users find establi
 * Model Validation
 <br>
 
-
-### Technologies
+# Technologies
 * Python and Libraries (pandas, numpy, sklearn, tensorflow, keras, surprise, wordcloud, matplotlib)
 * Docker (for Tensorflow GPU)
 * flask (api, not operational yet)
