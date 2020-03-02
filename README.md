@@ -30,23 +30,23 @@ From the master table, the city will be narrowed to Scottsdale to perform EDA, p
 ### EDA
 The business environment in Scottsdale Arizona is mainly service oriented. There are *7081* unique Scottsdale businesses in the data set and the top 20 categories are shown below:
 
-| Scottsdale, AZ |
-| : ---- : |
-| <img src='png/top_20_biz_cat.png' width='400' height='350'> |
+| Scottsdale, AZ | |
+| :-----: | :-----: |
+| <img src='png/top_20_biz_cat.png' width='400' height='350'> | |
 
 
 In addition to the top categories, it is important to see how the businesses are *rated* along with their *review counts* to get review sentiment:
 
 | Business Ratings Scottsdale, AZ | Business Review Count |
-| : ----- : | : ----- : |
+| :-----: | :-----: |
 | <img src='png/biz_stars_rating.png' width='400' height='350'> | <img src='png/biz_rev_count.png' width='400' height='350'> |
 
 
 Users then generate *ratings* for the business establishments, here are their *stars given* on the scale of 1 to 5:
 
-| Users in Scottsdale, AZ |
-| : ---- : |
-| <img src='png/user_stars_given.png' width='400' height='350'> |
+| Users in Scottsdale, AZ | |
+| :-----: | :-----: |
+| <img src='png/user_stars_given.png' width='400' height='350'> | |
 
 
 In addition to user ratings, it is good to get a sense of
