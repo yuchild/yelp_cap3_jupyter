@@ -28,33 +28,52 @@ From the master table, the city will be narrowed to Scottsdale to perform EDA, p
 
 
 ### EDA
-The business environment in Scottsdale Arizona is mainly service oriented. There are **7081** unique Scottsdale businesses in the data set and the top 20 categories are shown below:
+The business environment in Scottsdale Arizona is mainly service oriented. There are **7081** unique Scottsdale businesses in the dataset and the top 20 categories are shown below:
 
 | Scottsdale, AZ |
 | :-----: |
 | <img src='png/top_20_biz_cat.png' width='400' height='350'> |
+<br>
 
+In addition to the top categories, it is important to see how the businesses are **rated** (scale of 1 to 5) along with their **review counts** to get review sentiment:
 
-In addition to the top categories, it is important to see how the businesses are **rated** along with their **review counts** to get review sentiment:
-
-| Business Ratings Scottsdale, AZ | Business Review Count |
+| Business Ratings in Scottsdale, AZ | Business Review Count in Scottsdale, AZ|
 | :-----: | :-----: |
 | <img src='png/biz_stars_rating.png' width='400' height='350'> | <img src='png/biz_rev_count.png' width='400' height='350'> |
-
+<br>
 
 Users then generate **ratings** for the business establishments, here are their **stars given** on the scale of 1 to 5:
 
 | Users in Scottsdale, AZ |
 | :-----: |
 | <img src='png/user_stars_given.png' width='400' height='350'> |
+<br>
+
+In addition to user ratings (on the scale of 1 to 5), it is good to get a sense of user review and checkin counts, both should be **similar**:
+
+| User Ratings Scottsdale, AZ | User Check-In Counts Scottsdale, AZ|
+| :-----: | :-----: |
+| <img src='png/user_rev_count.png' width='400' height='350'> | <img src='png/checkin_frequencies.png' width='400' height='350'> |
+<br>
+
+Lets take a deeper dive into the reviews. Here are the **review** wordcloud and top 10 review words used:
+
+| Reviews Wordcloud Scottsdale, AZ | Top 10 Review Words Scottsdale, AZ|
+| :-----: | :-----: |
+| <img src='png/reviews_wordcloud.png' width='400' height='350'> | <img src='png/top_10_words_rev.png' width='400' height='350'> |
+<br>
+
+Lets take a deeper dive into the reviews. Here are he **tips** wordcloud and top 10 tip words used:
+
+| Tips Wordcloud Scottsdale, AZ | Top 10 Tip Words Scottsdale, AZ|
+| :-----: | :-----: |
+| <img src='png/tips_wordcloud.png' width='400' height='350'> | <img src='png/top_10_words_tip.png' width='400' height='350'> |
+<br>
+
+## models
 
 
-In addition to user ratings, it is good to get a sense of
-
-
-(Provide more detailed overview of the project.  Talk a bit about your data sources and what questions and hypothesis you are exploring. What specific data analysis/visualization and modeling work are you using to solve the problem? What blockers and challenges are you facing?  Feel free to number or bullet point things here)
-
-# Folders on the Github repo
+# Folders on the Github Repository
 * data - **folder missing** because of file size restrictions by Github
 * flask - folder where the web api is housed (not operational)
 * NN_Embeded_Model - folder where the Nero Network Model is stored
