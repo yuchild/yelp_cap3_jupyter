@@ -239,21 +239,18 @@ def NN_Model(df, n_factors = 10, ep = 5):
                                    , 'business_id'
                                    , 'biz_name'
                                    , 'average_stars']].loc[df.city == 'Scottsdale']
-    
-    
-    biz_df = user_rev_biz_scott.groupby(['business_id', 'biz_name']).size().reset_index(name="Freq")
-    biz_df.drop('Freq', axis=1, inplace=True)
-    
+      
     user_df = user_rev_biz_scott.groupby(['user_id', 'user_name']).size().reset_index(name="Freq")
     user_df.drop('Freq', axis=1, inplace=True)
-    
-    
-    
-    user_id_list = list(user_rev_biz_scott.user_id.value_counts().index)
+           
+    user_id_list = list(user_df.user_id)
     user_id_dict = {y: x for (x, y) in enumerate(user_id_list)}
     user_rev_biz_scott['user_num'] = user_rev_biz_scott.user_id.map(user_id_dict)
     
-    biz_id_list = list(user_rev_biz_scott.business_id.value_counts().index)
+    biz_df = user_rev_biz_scott.groupby(['business_id', 'biz_name']).size().reset_index(name="Freq")
+    biz_df.drop('Freq', axis=1, inplace=True)
+       
+    biz_id_list = list(biz_df.business_id)
     biz_id_dict = {y: x for (x, y) in enumerate(biz_id_list)}
     user_rev_biz_scott['biz_num'] = user_rev_biz_scott.business_id.map(biz_id_dict)
     
@@ -320,7 +317,7 @@ def NN_Model(df, n_factors = 10, ep = 5):
                                                            , y_test))]
                            )
     model.save('NN_Embed_Model')
-    return X, X_test, model, history
+    return user_id_dict, biz_id_dict, X, X_test, model, history
 
 
 def NN_Results_df(mod, xtest, n=10):
