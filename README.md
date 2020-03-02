@@ -147,8 +147,8 @@ This project surveyed three unsupervised learning and one consine similarity lea
 ## To Run This Project for Yourself
 1. Clone this [repo](https://github.com/yuchild/yelp_cap3_jupyter.git).
 2. Create a folder within the repo named **data** and download dataset from yelp [here](https://www.yelp.com/dataset/download).
-    **This is because Github does not accept files larger than 2.3GB**
-    **Yelp will ask for your information prior to download**
+    * **This is because Github does not accept files larger than 2.3GB**
+    * **Yelp will ask for your information prior to download**
 3. Unzip the yelp_dataset.tar inside the data folder you created
 4. Delete the yelp_dataset.tar file, as its file size is 3.9GB
 5. Make sure your workstation has 64GB of ram, or use AWS services with enough 64GB+ ram capacity.
