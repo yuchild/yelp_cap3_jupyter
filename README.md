@@ -115,8 +115,17 @@ Taking a sample business Janet Kirkman Bridal Redesigns, cosine similarity matri
 | <img src='png/janet_k_biz_rec.png' width='400' height='350'>  |
 <br>
 
+## Future Directions
+This project surveyed three unsupervised learning and one consine similarity learning. There are two main points of improvement:
+1. Devising a metric to produce ROC and Precision Recall Curves
+2. Further investigations into top 5 instead of top 1 errors from the validation separates
+3. A web API was in development with flask but failed to launch from technical challenges
+4. Tuning the neuro network model with possible addition of data from web scrapping
+5. Provide justification that these recommenders are better than the yelp sorting options
+<br>
+ 
 
-# Folders on the Github Repository
+## Folders on the Github Repository
 * data - **folder missing** because of file size restrictions by Github
 * flask - folder where the web api is housed (not operational)
 * NN_Embeded_Model - folder where the Nero Network Model is stored
