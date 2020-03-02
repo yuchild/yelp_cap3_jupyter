@@ -240,6 +240,15 @@ def NN_Model(df, n_factors = 10, ep = 5):
                                    , 'biz_name'
                                    , 'average_stars']].loc[df.city == 'Scottsdale']
     
+    
+    biz_df = user_rev_biz_scott.groupby(['business_id', 'biz_name']).size().reset_index(name="Freq")
+    biz_df.drop('Freq', axis=1, inplace=True)
+    
+    user_df = user_rev_biz_scott.groupby(['user_id', 'user_name']).size().reset_index(name="Freq")
+    user_df.drop('Freq', axis=1, inplace=True)
+    
+    
+    
     user_id_list = list(user_rev_biz_scott.user_id.value_counts().index)
     user_id_dict = {y: x for (x, y) in enumerate(user_id_list)}
     user_rev_biz_scott['user_num'] = user_rev_biz_scott.user_id.map(user_id_dict)
