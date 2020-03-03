@@ -200,8 +200,8 @@ def surprise_bench(df):
     benchmark = []
     
     # Iterate over all algorithms
-    for algorithm in [SVD()
-                      , NMF()
+    for algorithm in [SVD(n_factors=10)
+                      , NMF(n_factors=10)
                       , NormalPredictor()
                       , BaselineOnly()
                      ]:

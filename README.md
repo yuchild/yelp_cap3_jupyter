@@ -94,9 +94,9 @@ The collaborative matrix used is made up of **140940** unique user_id on the ind
 ### SVD and NMF Model Validations
 Using the python library Surprise, the folling metrics for 7 fold cross validations are achieved:
 
-| 7 CV Validations with Surprise |
+| 7 CV Validations with Surprise k=10 |
 | :-----: |
-| <img src='png/validations.png' width='400' height='350'>  |
+| <img src='png/validations10.png' width='400' height='350'>  |
 <br>
 
 
