@@ -85,9 +85,9 @@ Lets take a deeper dive into user tips. Here are he **tips** wordcloud and top 1
 ### SVD and NMF Models
 The collaborative matrix used is made up of **140940** unique user_id on the index column and **7081** unique business_id along the top column headers. The values inside are comprised of the average of user ratings. The average user rating is chosen to exploit user insights along the types of businesses they have patronized. Below is a sample of one user's recommendation and her 10 patronized establishments:
 
-| SVD Recommendations in Scottsdale, AZ | NMF Recommendations  in Scottsdale, AZ | Patroized Establishments in Scottsdale |
+| SVD Recommendations in Scottsdale, AZ | NMF Recommendations  in Scottsdale, AZ | Patronized Establishments in Scottsdale |
 | :-----: | :-----: | :-----: |
-| <img src='png/svd.png' width='250' height='200'> | <img src='png/nmf10.png' width='250' height='200'> | <img src='png/user_patronage.png' width='250' height='200'> |
+| <img src='png/svd.png' width='250' height='200'> | <img src='png/nmf.png' width='250' height='200'> | <img src='png/user_patronage.png' width='250' height='200'> |
 <br>
 
 
