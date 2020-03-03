@@ -222,7 +222,7 @@ def surprise_bench(df):
 
 
 def NMF_Mat(df):
-    model_nmf = NMF(n_components = 40
+    model_nmf = NMF(n_components = 10
                , init = 'random'
                , random_state = 0)
     m = model_nmf.fit_transform(df)
