@@ -27,7 +27,7 @@ The purpose of this project is to create recommenders to help users find establi
 ## Project Description and Exploratory Data Analysis (EDA)
 The project is based on the open yelp dataset found [here](yelp.com/dataset). The recommenders will mainly come from three sources: user.json, review.json, and business.json (see how to run the project to get those files below), which will be merged to create a master table with an inner join based on the feature business_id.
 
-From the master table, the city will be narrowed to Scottsdale to perform EDA, pivot table on user_id and business_id, SVD, NMF, Neuro Network modeling and content based filtering. The result is four recommender models: 3 collaborative and 1 content based.
+From the master table, the city will be narrowed to Scottsdale to perform EDA, pivot table on user_id and business_id, SVD, NMF, neural Network modeling and content based filtering. The result is four recommender models: 3 collaborative and 1 content based.
 <br>
 
 
@@ -100,16 +100,16 @@ Using the python library Surprise, the folling metrics for 7 fold cross validati
 <br>
 
 
-### Embedded Neuro Network Model
+### Embedded Neural Network Model
 This 10 factor embedded (for both user_id and business_id) network was not as robust as the SVD and NMF models. See **MSE Loss** and **Accuracy** below:
 
-| Embedded Neuro Network Loss and Accuracy |
+| Embedded Neural Network Loss and Accuracy |
 | :-----: |
 | <img src='png/NN_loss_acc.png' width='800' height='350'>  |
 <br>
 
 
-| Sample output of Neuro Network Model |
+| Sample output of Neural Network Model |
 | :-----: |
 | <img src='png/NN_output.png' width='400' height='350'>  |
 <br>
@@ -118,7 +118,7 @@ This 10 factor embedded (for both user_id and business_id) network was not as ro
 ### Content Filtering for Recommending Businesses
 Taking a sample business Janet Kirkman Bridal Redesigns, cosine similarity matrix was able to recommend the following:
 
-| Sample output for Neuro Network Model |
+| Sample output for Neural Network Model |
 | :-----: |
 | <img src='png/janet_k_biz.png' width='350' height='100'>  |
 | <img src='png/janet_k_biz_rec.png' width='350' height='300'>  |
@@ -129,7 +129,7 @@ This project surveyed three unsupervised learning and one consine similarity lea
 1. Devising a metric to produce ROC and Precision Recall Curves
 2. Further investigations into top 5 instead of top 1 errors from the validation separates
 3. A web API was in development with flask but failed to launch from technical challenges
-4. Tuning the neuro network model with possible addition of data from web scrapping
+4. Tuning the neural network model with possible addition of data from web scrapping
 5. Provide justification that these recommenders are better than the yelp sorting options
 <br>
 
