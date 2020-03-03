@@ -87,7 +87,7 @@ The collaborative matrix used is made up of **140940** unique user_id on the ind
 
 | SVD Recommendations in Scottsdale, AZ | NMF Recommendations  in Scottsdale, AZ | Patroized Establishments in Scottsdale |
 | :-----: | :-----: | :-----: |
-| <img src='png/svd.png' width='250' height='200'> | <img src='png/nmf.png' width='250' height='200'> | <img src='png/user_patronage.png' width='250' height='200'> |
+| <img src='png/svd.png' width='250' height='200'> | <img src='png/nmf10.png' width='250' height='200'> | <img src='png/user_patronage.png' width='250' height='200'> |
 <br>
 
 
