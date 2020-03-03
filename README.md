@@ -64,7 +64,7 @@ In addition to user ratings (on the scale of 1 to 5), it is good to get a sense 
 <br>
 
 
-Lets take a deeper dive into the reviews. Here are the **review** wordcloud and top 10 review words used:
+Lets take a deeper dive into user reviews. Here are the **review** wordcloud and top 10 review words used:
 
 | Reviews Wordcloud Scottsdale, AZ | Top 10 Review Words Scottsdale, AZ|
 | :-----: | :-----: |
@@ -72,7 +72,7 @@ Lets take a deeper dive into the reviews. Here are the **review** wordcloud and 
 <br>
 
 
-Lets take a deeper dive into the reviews. Here are he **tips** wordcloud and top 10 tip words used:
+Lets take a deeper dive into user tips. Here are he **tips** wordcloud and top 10 tip words used:
 
 | Tips Wordcloud Scottsdale, AZ | Top 10 Tip Words Scottsdale, AZ|
 | :-----: | :-----: |
